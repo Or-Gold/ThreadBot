@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@discordjs/builders": "^0.15.0",
+    "@discordjs/rest": "^0.5.0",
+    "discord-api-types": "^0.36.2",
+    "discord.js": "^13.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.4",
+    "ts-node": "^10.9.1"
+  },
+  "name": "threadbot",
+  "version": "1.0.0",
+  "description": "A bot for tracking bug reports in discord",
+  "main": "src/main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/main.ts",
+    "deploy": "ts-node src/helpers/deployCommands.ts"
+  },
+  "author": "Or Goldstein",
+  "license": "ISC"
+}
