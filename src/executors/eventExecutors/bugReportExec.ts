@@ -1,29 +1,30 @@
-import { Message, TextChannel } from "discord.js";
+import { Message } from "discord.js";
 import { bugChannel } from "../../config.json"
+import { BUG_REPORT_MESSAGE } from "../../helpers/constants"
 
-const BUG_REPORT_MESSAGE =
-"\
-Hi! Welcome to bug reports.\n\
-This thread was created so we'd be able to track your \
-issue more reliabley. If you've got any more information on the \
-particular bug you've experienced, you're welcomed to share it \
-right here.\n\
-The WynnBuilder team will make sure to look into the issue \
-and fix it as soon as possible.\n\
-Once the issue is resolved, either you a staff member will close the \
-issue using the /close command.\
-"
 
 export default async function bugReportExec(interaction: Message) {
     if (interaction.author.bot) {
         return;
     }
+
     const channel = interaction.channel
-    const name = (interaction.content.length < 100) ? interaction.content : interaction.content.slice(0, 100).concat('...')
-    if (channel.isText() && (channel as TextChannel).name == bugChannel) {
-        const thread = await interaction.startThread({ name: name })
-        if (thread) {
-            thread.send(BUG_REPORT_MESSAGE)
+    if (channel.type !== 'DM' && channel.name === bugChannel) {
+
+        if (!interaction.content) {
+            await interaction.reply("Please describe your issue with text! Images alone aren't always enough to understand and debug the issue.")
+                .then(msg =>
+                    setTimeout(() => msg.delete(), 5000))
+                .catch(err => console.log("There was an error deleting the reply", err));
+            await interaction.delete();
+
+        } else {
+            const name = (interaction.content.length < 100) ? interaction.content : interaction.content.slice(0, 100).concat('...')
+            const thread = await interaction.startThread({ name: name })
+            if (thread) {
+                thread.send(BUG_REPORT_MESSAGE)
+            }
         }
+
     }
 }

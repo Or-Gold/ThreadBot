@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import issueExec from "../../executors/commandExecutors/issue/issueExec"
+import issueExec from "../../executors/commandExecutors/issueExec"
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -28,7 +28,11 @@ module.exports = {
             .addSubcommand(subcommand =>
                 subcommand
                     .setName('github')
-                    .setDescription('Add an issue to the github repo')),
+                    .setDescription('Add an issue to the github repo'))
+            .addSubcommand(subcommand => 
+                subcommand
+                    .setName('repeated')
+                    .setDescription('Mark an issue as repeated and close it')),
 
     async execute(interaction: CommandInteraction) {
         await issueExec(interaction);

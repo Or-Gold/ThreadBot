@@ -2,7 +2,7 @@ import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v10";
 import fs from "fs"
 import { token, clientId } from "../config.json"
-import CommandObject from "./CommandObject";
+import CommandObject from "../types/CommandObject";
 
 const commands = [];
 
