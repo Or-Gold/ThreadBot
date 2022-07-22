@@ -1,4 +1,5 @@
-import { CommandInteraction, ThreadChannel } from "discord.js";
+import { CommandInteraction, MessageEmbed, ThreadChannel } from "discord.js";
+import { isValidHttpUrl } from "../../helpers/stringManipulation";
 import { bugChannel } from "../../config.json"
 
 export default async function issueExec(interaction: CommandInteraction) {
@@ -25,8 +26,8 @@ export default async function issueExec(interaction: CommandInteraction) {
             await issueGithub(interaction, thread);
             break;
         }
-        case 'repeat': {
-            await issueRepeat(interaction, thread);
+        case 'repeated': {
+            await issueRepeated(interaction, thread);
             break;
         }
     }
@@ -68,18 +69,29 @@ async function issueRename(interaction: CommandInteraction, thread: ThreadChanne
     }
 }
 
-async function issueGithub(interaction: CommandInteraction, thread: ThreadChannel) {
+async function issueGithub(interaction: CommandInteraction, _thread: ThreadChannel) {
     // TODO: create github issue from a discord thread issue.
     await interaction.reply("Not implemented!")
 }
 
-async function issueRepeat(interaction: CommandInteraction, thread: ThreadChannel) {
+async function issueRepeated(interaction: CommandInteraction, thread: ThreadChannel) {
     if (thread.name.startsWith("✅")) {
         await interaction.reply("This issue is already closed!");
         await thread.setArchived();
     } else {
+        const prev = interaction.options.getString('original', true)
+        if (!isValidHttpUrl(prev)) {
+            return await interaction.reply("The URL provided is not valid! please provide a valid URL that links to the previous issue.")
+
+        }
+
+        const original_issue = new MessageEmbed()
+            .setColor('#ef1f1f')
+            .setTitle('Previous issue')
+            .setURL(prev)
+
+        await thread.send({embeds: [original_issue]});
         await interaction.reply("Closing repeated issue... (Notice! you can only close an issue once every 10 minutes)");
-        await interaction.followUp("Please do your best to make sure the issue isn't already tracked in Discord or Github before submitting an issue!");
         await thread.setName("✅+🔁".concat(thread.name));
         await thread.setArchived();
     }
