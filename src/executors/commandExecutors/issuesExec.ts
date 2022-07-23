@@ -18,15 +18,15 @@ export default async function issuesExec(interaction: ChatInputCommandInteractio
                     name: `${capitalizeFirst(threadName)}`,
                     value: `[Issue](${thread.url}), [Message](${starterMessageURL})`
                 }
-            }))
+            }));
 
         const listEmbed = new EmbedBuilder()
             .setAuthor({ name: interaction.user.username, iconURL: interaction.user.avatarURL()?.toString() })
             .setColor(0xef1f1f)
             .setTitle('Issue list')
-            .addFields(...threadMap)
+            .addFields(...threadMap);
 
 
-        interaction.reply({ embeds: [listEmbed] })
+        interaction.reply({ embeds: [listEmbed] });
     }
 }
