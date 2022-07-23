@@ -1,7 +1,7 @@
-import { ContextMenuCommandBuilder, SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, ContextMenuInteraction } from "discord.js";
+import { ContextMenuInteraction, SlashCommandBuilder, ContextMenuCommandBuilder, ChatInputCommandInteraction } from "discord.js";
+import ThreadBot from "../ThreadBot";
 
 export default interface CommandObject {
     data: SlashCommandBuilder | ContextMenuCommandBuilder;
-    execute(interaction: CommandInteraction | ContextMenuInteraction): Promise<any>;
+    execute(interaction: ChatInputCommandInteraction | ContextMenuCommandInteraction): Promise<any>;
 }

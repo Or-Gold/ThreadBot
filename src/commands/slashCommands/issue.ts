@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import issueExec from "../../executors/commandExecutors/issueExec"
 
 module.exports = {
@@ -41,7 +40,7 @@ module.exports = {
                 })
         ),
 
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         await issueExec(interaction);
     }
 }

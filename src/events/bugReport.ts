@@ -1,4 +1,4 @@
-import { Message, TextChannel } from "discord.js";
+import { Message } from "discord.js";
 import bugReportExec from "../executors/eventExecutors/bugReportExec"
 
 module.exports = {
