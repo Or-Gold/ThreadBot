@@ -1,4 +1,4 @@
-import { Client, Collection, TextChannel, ThreadChannel } from 'discord.js';
+import { Client, Collection } from 'discord.js';
 import CommandObject from './types/CommandObject';
 import { CLIENT_INTENTS } from './helpers/constants';
 import commandListener from './listeners/commandListener';

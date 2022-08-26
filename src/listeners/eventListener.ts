@@ -8,7 +8,7 @@ export default function eventListener(client: ThreadBot) {
         if (event.once) {
             client.once(event.name, async (...args) => await event.execute(client, ...args));
         } else {
-            client.on(event.name, async (...args) => await event.execute(client, ...args));
+            client.on(event.name, async (...args) => await event.execute(...args));
         }
     }
 }

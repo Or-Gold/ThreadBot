@@ -4,12 +4,10 @@ import {
 	Message,
 	ThreadAutoArchiveDuration,
 } from 'discord.js';
-import ThreadBot from 'src/ThreadBot';
 import { bugChannelId } from '../../config.json';
 import { BUG_REPORT_MESSAGE } from '../../helpers/constants';
 
 export default async function bugReportExec(
-	client: ThreadBot,
 	interaction: Message
 ) {
 	if (interaction.author.bot) {

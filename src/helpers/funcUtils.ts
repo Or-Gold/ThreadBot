@@ -1,6 +1,4 @@
-import { ChannelType, CommandInteraction } from 'discord.js';
-import ThreadBot from 'src/ThreadBot';
-import { bugChannelId } from '../config.json';
+import { CommandInteraction } from 'discord.js';
 
 type Ms = number;
 
