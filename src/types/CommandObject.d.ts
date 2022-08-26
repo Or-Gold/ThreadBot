@@ -3,5 +3,5 @@ import ThreadBot from "../ThreadBot";
 
 export default interface CommandObject {
     data: SlashCommandBuilder | ContextMenuCommandBuilder;
-    execute(interaction: ChatInputCommandInteraction | ContextMenuCommandInteraction): Promise<any>;
+    execute(interaction: ChatInputCommandInteraction | ContextMenuCommandInteraction, client?: THreadBot): Promise<any>;
 }

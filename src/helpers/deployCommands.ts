@@ -18,7 +18,7 @@ for (const dir of commandDirs) {
         commands.push(command.data.toJSON());
     }
 }
-console.log(commands);
+
 const rest = new REST({ version: '10' }).setToken(token);
 rest.put(Routes.applicationCommands(clientId), { body: commands }).
     then(() => console.log("Successfully registered application slash commands!")).

@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import ThreadBot from "src/ThreadBot";
 import issueExec from "../../executors/commandExecutors/issueExec"
 
 module.exports = {
@@ -27,20 +28,31 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('github')
-                .setDescription('Add an issue to the github repo'))
+                .setDescription('Add an issue to the github repo')
+                .addStringOption(option =>
+                    option
+                        .setName('title')
+                        .setDescription('The title of the issue')
+                        .setRequired(true))
+                .addStringOption(option =>
+                    option
+                        .setName('body')
+                        .setDescription('The body of the issue')
+                        .setRequired(true))
+                      )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('repeated')
                 .setDescription('Mark an issue as repeated and close it')
-                .addStringOption(option => {
-                    return option
+                .addStringOption(option =>
+                    option
                         .setName('original')
                         .setDescription('A link to the original issue')
                         .setRequired(true)
-                })
+                )
         ),
 
-    async execute(interaction: ChatInputCommandInteraction) {
-        await issueExec(interaction);
+    async execute(interaction: ChatInputCommandInteraction, client: ThreadBot) {
+        await issueExec(interaction, client);
     }
 }
