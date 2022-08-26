@@ -103,7 +103,7 @@ async function issueGithub(
 	client: ThreadBot,
 	thread: ThreadChannel
 ) {
-	interaction.reply('Creating issue...');
+	interaction.deferReply();
 	const issueTitle = interaction.options.getString('title', true);
 	const issueBody = interaction.options.getString('body', true);
 	const { status: statusCode, data: resData } =
@@ -114,9 +114,13 @@ async function issueGithub(
 			body: `This issue was created from discord. [Issue Link](${thread.url}).\n${issueBody}`,
 		});
 	if (statusCode !== GithubIssueCreateStatusCode.Created) {
-		await interaction.reply(`issue creation failed with code ${statusCode}`);
+		await interaction.editReply(
+			`issue creation failed with code ${statusCode}`
+		);
 	} else {
-		await interaction.reply(`Created a new github issue!\n${resData.html_url}`);
+		await interaction.editReply(
+			`Created a new github issue!\n${resData.html_url}`
+		);
 	}
 }
 

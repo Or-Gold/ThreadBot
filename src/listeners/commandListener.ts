@@ -21,10 +21,16 @@ export default function commandListener(client: ThreadBot) {
 			await command.execute(interaction, client);
 		} catch (error) {
 			console.error(error);
-			await interaction.reply({
-				content: 'There was an error while executing this command!',
-				ephemeral: true,
-			});
+			if (interaction.replied) {
+				await interaction.editReply(
+					'There was an error while executing this command!'
+				);
+			} else {
+				await interaction.reply({
+					content: 'There was an error while executing this command!',
+					ephemeral: true,
+				});
+			}
 		}
 	});
 }
