@@ -41,6 +41,6 @@ The bot will automatically listen to messages and open threads for each message 
   - `close` - Close an issue.
   - `reopen` - Reopen a closed issue.
   - `rename <name>` - Rename an open issue. A name must be provided, and must be less than 100 characters long.
-  - `github <title> <body>` - Port an issue to a github issue (Not implemented).
+  - `github <title> <body>` - Port an issue to a github issue.
   - `repeated <original>` - Close an issue and mark it as repeated. The original issue must be provided.
 - `/issues` - Lists all open issues (active threads).
